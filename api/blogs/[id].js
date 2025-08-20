@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 
 module.exports = async (req, res) => {
   try {
-    const { id } = req.query;
+    const id = (req.query.id || "").trim();
     
     // Validate ID
     if (!ObjectId.isValid(id)) {
