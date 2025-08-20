@@ -1,6 +1,6 @@
 const { connectToDatabase, collectionName } = require('../../lib/mongodb');
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   try {
     const db = await connectToDatabase();
 
@@ -32,6 +32,7 @@ module.exports = async (req, res) => {
       };
 
       const result = await db.collection(collectionName).insertOne(newBlog);
+
       return res.status(201).json({
         message: "Blog created",
         blog: newBlog,
@@ -47,4 +48,4 @@ module.exports = async (req, res) => {
     console.error(err);
     return res.status(500).json({ error: "Server error" });
   }
-};
+}
